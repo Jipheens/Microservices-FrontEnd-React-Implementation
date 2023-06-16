@@ -1,3 +1,4 @@
+import './fetchdata.css';
 import axios from 'axios'
 import React, { useState } from 'react'
 
@@ -34,39 +35,35 @@ console.log (error)
   return (
     <div>
 
-<form onSubmit={handleSubmit}>
+<form onSubmit={handleSubmit} className="centered-form">
   <h1>{title}</h1>
   <div className="form-row">
     <div className="form-group col-md-6">
       <label htmlFor="inputEmail4">Item Code</label>
-      <input type="text" className="form-control" id="itemcode" name="itemcode"  onChange={handleChange}   placeholder="Item Code"/>
+      <input type="text" className="form-control" id="itemcode" name="itemcode" onChange={handleChange} placeholder="Item Code" />
     </div>
     <div className="form-group col-md-6">
       <label htmlFor="inputPassword4">Item Name</label>
-      <input type="text" className="form-control" id="itemname"  name="itemName"  onChange={handleChange}  placeholder="item Name"/>
-
-      <div className="form-group">
-    <label htmlFor="inputAddress">Buying price</label>
-    <input type="text" className="form-control" id="bp" name="buyingPrice"  onChange={handleChange}  placeholder="Buying price"/>
-  </div>
-  <div className="form-group">
-    <label htmlFor="inputAddress"> Selling  Price</label>
-    <input type="text" className="form-control" id="SP" name="sellingPrice"  onChange={handleChange}  placeholder="Selling  Price"/>
+      <input type="text" className="form-control" id="itemname" name="itemName" onChange={handleChange} placeholder="Item Name" />
+    </div>
   </div>
 
-  <div>
   <div className="form-group">
-    <label htmlFor="inputAddress">Terminus </label>
-    <input type="text" className="form-control" id="terminus" name="terminus"  onChange={handleChange}  placeholder="terminus"/>
+    <label htmlFor="inputAddress">Buying Price</label>
+    <input type="text" className="form-control" id="bp" name="buyingPrice" onChange={handleChange} placeholder="Buying Price" />
   </div>
+
+  <div className="form-group">
+    <label htmlFor="inputAddress">Selling Price</label>
+    <input type="text" className="form-control" id="SP" name="sellingPrice" onChange={handleChange} placeholder="Selling Price" />
   </div>
-       </div>
-      
+
+  <div className="form-group">
+    <label htmlFor="inputAddress">Terminus</label>
+    <input type="text" className="form-control" id="terminus" name="terminus" onChange={handleChange} placeholder="Terminus" />
   </div>
-  
- 
-  
-  <button  className="btn btn-primary" > ADD</button>
+<br></br>
+  <button className="btn btn-primary">ADD</button>
 </form>
 
 
