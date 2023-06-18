@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './fetchdata.css';
 
-
 function Fetchdata() {
   const [data, setData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     fetchData();
@@ -13,7 +13,7 @@ function Fetchdata() {
 
   async function fetchData() {
     try {
-      const response = await axios.get("http://localhost:40805/api/item");
+      const response = await axios.get('http://localhost:40805/api/item');
       setData(response.data);
     } catch (error) {
       console.log(error);
@@ -23,11 +23,32 @@ function Fetchdata() {
   async function handleDelete(itemCode) {
     try {
       await axios.delete(`http://localhost:40805/api/item/${itemCode}`);
-      fetchData(); 
+      fetchData();
     } catch (error) {
       console.log(error);
     }
   }
+
+  function handleSearch(e) {
+    setSearchQuery(e.target.value);
+  }
+
+  function filterData() {
+    if (!searchQuery) {
+      return data;
+    }
+
+    const lowercaseQuery = searchQuery.toLowerCase();
+
+    return data.filter((product) =>
+      Object.values(product)
+        .join(' ')
+        .toLowerCase()
+        .includes(lowercaseQuery)
+    );
+  }
+
+  const filteredData = filterData();
 
   return (
     <div>
@@ -41,6 +62,14 @@ function Fetchdata() {
       <p>
         <hr />
       </p>
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchQuery}
+          onChange={handleSearch}
+        />
+      </div>
       <table className="table table-striped table-active table-hover centered-table">
         <thead className="table-dark">
           <tr>
@@ -53,7 +82,7 @@ function Fetchdata() {
           </tr>
         </thead>
         <tbody>
-          {data.map(product => (
+          {filteredData.map((product) => (
             <tr key={product.ItemCode}>
               <td>{product.ItemCode}</td>
               <td>{product.ItemName}</td>
